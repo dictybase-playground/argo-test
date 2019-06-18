@@ -9,6 +9,7 @@ spec:
     parameters:
     - name: message
       value: no message
+
   templates:
   - name: argotest
     inputs:
@@ -19,4 +20,3 @@ spec:
       env:
       - name: GITHUB_WEBHOOK_CONTENTS
         value: "{{inputs.parameters.message}}"
-      # args: ["{{inputs.parameters.message}}"]
