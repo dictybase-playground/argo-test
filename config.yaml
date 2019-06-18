@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: github-
+spec:
+  # name of template to invoke
+  entrypoint: argotest
+  arguments:
+    parameters:
+    - name: message
+      value: no message
+  templates:
+  - name: argotest
+    inputs:
+      parameters:
+      - name: message
+    container:
+      image: dictybase/argotest:latest
+      env:
+      - name: GITHUB_WEBHOOK_CONTENTS
+        value: "{{inputs.parameters.message}}"
+      # args: ["{{inputs.parameters.message}}"]

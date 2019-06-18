@@ -1,0 +1,4 @@
+FROM node:10.4.0-alpine
+ENV GITHUB_WEBHOOK_CONTENTS $GITHUB_WEBHOOK_CONTENTS
+COPY print.js /
+ENTRYPOINT ["node", "./print.js"]
