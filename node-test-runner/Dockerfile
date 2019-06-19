@@ -1,7 +1,7 @@
 FROM node:10.4.0-alpine
 
-ENV GITHUB_CLONE_URL $GITHUB_CLONE_URL
-ENV GITHUB_REPO_NAME $GITHUB_REPO_NAME
+ENV GITHUB_CLONE_URL ${GITHUB_CLONE_URL:-https://github.com/dictyBase/dicty-frontpage.git}
+ENV GITHUB_REPO_NAME ${GITHUB_REPO_NAME:-dicty-frontpage}
 ARG client_keys
 ENV CLIENT_KEYS ${client_keys:-https://raw.githubusercontent.com/dictybase-playground/client-keys/2.0.0/clientConfig.eric.js}
 
