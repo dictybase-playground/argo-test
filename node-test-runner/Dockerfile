@@ -1,15 +1,22 @@
 FROM node:10.4.0-alpine
+
 ARG clone_url
 ENV GITHUB_CLONE_URL ${clone_url:-https://github.com/dictyBase/dicty-frontpage.git}
 ARG name
 ENV GITHUB_REPO_NAME ${name:-dicty-frontpage}
+ARG client_keys
+ENV CLIENT_KEYS ${client_keys:-https://raw.githubusercontent.com/dictybase-playground/client-keys/2.0.0/clientConfig.eric.js}
+
 RUN apk update && apk upgrade && \
   apk add --no-cache bash git openssh jq
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-RUN git clone $GITHUB_CLONE_URL && cd $GITHUB_REPO_NAME
-COPY package*.json ./
-ADD src src
-ADD public public
-ENV NODE_PATH src
+RUN git clone $GITHUB_CLONE_URL && cd $GITHUB_REPO_NAME && git checkout develop
+
+WORKDIR /$GITHUB_REPO_NAME
+# overwrite the client key file
+ADD $CLIENT_KEYS src/utils/clientConfig.js
+
+# ENV CI is required to run tests without interactive mode
+# https://facebook.github.io/create-react-app/docs/running-tests#on-your-own-environment
+ENV CI true
+
 RUN npm install && npm run test
