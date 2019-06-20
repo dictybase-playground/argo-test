@@ -17,6 +17,6 @@ ADD $CLIENT_KEYS src/utils/clientConfig.js
 # https://facebook.github.io/create-react-app/docs/running-tests#on-your-own-environment
 ENV CI true
 
-RUN npm install && npm run test && echo howdy
+RUN npm install
 
-# ENTRYPOINT ["npm", "test"]
+CMD ["npm run"]
