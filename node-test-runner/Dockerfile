@@ -19,4 +19,4 @@ ENV CI true
 
 RUN npm install
 
-CMD ["npm run"]
+CMD ["npm"]
