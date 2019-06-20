@@ -6,7 +6,7 @@ ENV CLIENT_KEYS ${CLIENT_KEYS:-https://raw.githubusercontent.com/dictybase-playg
 
 RUN apk update && apk upgrade && \
   apk add --no-cache bash git openssh jq
-RUN git clone $GITHUB_CLONE_URL && cd $GITHUB_REPO_NAME && git checkout develop
+RUN git clone $GITHUB_CLONE_URL && cd $GITHUB_REPO_NAME
 
 WORKDIR /$GITHUB_REPO_NAME
 
